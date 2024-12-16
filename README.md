@@ -12,7 +12,7 @@ I recommend you know some of the following:
   - If new to Django, watch [Your First Django Project](https://www.codingforentrepreneurs.com/courses/your-first-django-project) or [Try Django 3.2](https://www.youtube.com/playlist?list=PLEsfXFp6DpzRMby_cSoWTFw8zaMdTEXgL)
 - __SaaS fundamentals with Django__ (Optional).
   - Such as Stripe integration, groups, user permissions,
-  - Consider watching [SaaS Foundations](https://www.youtube.com/watch?v=WbNNESIxJnY)
+  - Consider watching [SaaS Foundations](https://www.youtube.com/watch?v=WbNNESIxJnY) or reviewing the [SaaS Foundations code](https://github.com/codingforentrepreneurs/SaaS-Foundations)
 
 ## Links
 - [Code](https://github.com/codingforentrepreneurs/SaaS-for-Enterprise-with-Django)
