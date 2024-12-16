@@ -42,3 +42,25 @@ I recommend you know some of the following:
 > Note: [django-tenants](https://github.com/django-tenants/django-tenants) is not used in this course. While Django Tenants is a _very good tool_ it requires you to start with Django tenants for your SaaS projects. This tutorial does not. django-tenants was instrumental in designing this course. Once you finish the course, I encourage you to play around with django-tenants!
 
 
+
+## Definitions
+
+_Superuser_: the django admin user
+
+_Standard User_: normal Django user with standard SaaS privileges (not a superuser or manager). Can be promoted to manager or superuser. Can only access the standard console within the SaaS.
+
+_Standard group_: a Django group (built-in) of non-enterprise users. Logs in to the standard console.
+
+_Standard console_: The primary domain's console for accessing the SaaS. Think a normal Django SaaS project.
+
+_Manager User_ a standard user with permission to manage an enterprise; can access the standard console _and_ their enterprise console(s).
+
+_Enterprise console_: A dedicated subdomain (e.g. `cfe.example.com`) for Enterprise Users to login. The data is isolated via Postgres Schemas or per-enterprise databases.
+
+_Enterprise User_: can *only* login to the enterprise console within the SaaS. Cannot access the Standard console since it will *not* have record of the user.
+
+_Enterprise_: A group of _enterprise users_ that is managed by a _standard user_ with _manager_ permissions.
+
+> Have questions? Comments? [Write them in the dicussions](https://github.com/codingforentrepreneurs/SaaS-for-Enterprise-with-Django/discussions/1)
+
+
