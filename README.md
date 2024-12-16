@@ -1,6 +1,9 @@
 # SaaS for Enterprise with Django
 Enterprise customers often need data isolated from other users. It's known as multi-tenant. This repo is reference code for the related course. 
 
+## Need help?
+Use [the discussions tab](https://github.com/codingforentrepreneurs/SaaS-for-Enterprise-with-Django/discussions).
+
 ## Before you start
 
 I recommend you know some of the following:
