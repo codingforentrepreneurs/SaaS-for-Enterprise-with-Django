@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from decouple import config
 from pathlib import Path
+from .installed import (
+    _CUSTOMER_INSTALLED_APPS,
+    _INSTALLED_APPS
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,29 +63,8 @@ if DEBUG:
 
 # Application definition
 
-INSTALLED_APPS = [
-    # django-apps
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    # my-apps
-    "commando",
-    "customers",
-    "profiles",
-    "subscriptions",
-    "visits",
-    # third-party-apps
-    "allauth_ui",
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.github',
-    'slippers',
-    "widget_tweaks",
-]
+INSTALLED_APPS = _INSTALLED_APPS
+CUSTOMER_INSTALLED_APPS = _CUSTOMER_INSTALLED_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
