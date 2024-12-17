@@ -1,0 +1,10 @@
+
+scripts:
+  install: 
+    - venv/bin/pip-compile src/requirements/prod.in -o requirements.txt
+    - venv/bin/python -m pip install -r requirements.txt
+  install_dev:
+    - venv/bin/pip-compile src/requirements/prod.in -o requirements.txt
+    - venv/bin/python -m pip install -r requirements.txt
+    - venv/bin/pip-compile src/requirements/dev.in -o requirements.dev.txt
+    - venv/bin/python -m pip install -r requirements.dev.txt

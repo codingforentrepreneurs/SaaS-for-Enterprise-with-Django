@@ -1,0 +1,12 @@
+Django>=5.1,<5.2
+gunicorn
+python-decouple
+psycopg[binary]
+dj-database-url
+requests
+whitenoise
+django-allauth[socialaccount]
+django-allauth-ui
+django-widget-tweaks
+stripe
+slippers
