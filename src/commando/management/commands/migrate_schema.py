@@ -9,16 +9,26 @@ from helpers.db import statements as db_statements
 class Command(BaseCommand):
 
     def handle(self, *args: Any, **options: Any):
-        schema_name = 'example'
         with connection.cursor() as cursor:
             cursor.execute(
-                db_statements.CREATE_SCHEMA_SQL.format(schema_name=schema_name)
+                db_statements.CREATE_SCHEMA_SQL.format(schema_name="public")
             )
             cursor.execute(
-                db_statements.ACTIVATE_SCHEMA_SQL.format(schema_name=schema_name)
+                db_statements.ACTIVATE_SCHEMA_SQL.format(schema_name="public")
             )
-        # python manage.py migrate --no-input
-        call_command("migrate", interactive=False)
+            call_command("migrate", interactive=False)
+
+        schemas = ['example']
+        for schema_name in schemas:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    db_statements.CREATE_SCHEMA_SQL.format(schema_name=schema_name)
+                )
+                cursor.execute(
+                    db_statements.ACTIVATE_SCHEMA_SQL.format(schema_name=schema_name)
+                )
+            # python manage.py migrate --no-input
+            call_command("migrate", interactive=False)
         # User = get_user_model()
         # user_a = User.objects.create_superuser(
         #     username='example',
