@@ -1,5 +1,5 @@
 # SaaS for Enterprise with Django
-Enterprise customers often need data isolated from other users. It's known as multi-tenant. This repo is reference code for the related course. 
+Learn how to build an Enterprise SaaS project using Django, Neon Postgres, TailwindCSS, SaaS Starter Code, and more. Enterprise SaaS means we need a a way to isolate customer data by implementing multi-tenancy, subdomain-based auth, and much more. We start with an existing Django application and build on top of that.
 
 ## Need help?
 Use [the discussions tab](https://saasgorillas.com/discussions).
