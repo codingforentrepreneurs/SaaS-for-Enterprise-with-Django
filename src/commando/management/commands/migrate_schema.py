@@ -11,7 +11,7 @@ from helpers.db import statements as db_statements
 class Command(BaseCommand):
 
     def handle(self, *args: Any, **options: Any):
-        schemas = ["example_a"]
+        schemas = ["example"]
         skip_public = True
 
         if not skip_public:

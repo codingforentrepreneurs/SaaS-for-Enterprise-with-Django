@@ -26,7 +26,7 @@ def about_view(request, *args, **kwargs):
     except:
         percent = 0
     my_title = "My Page"
-    html_template = "home.html"
+    html_template = "landing/main.html"
     my_context = {
         "page_title": my_title,
         "page_visit_count": page_qs.count(),

@@ -70,6 +70,7 @@ CUSTOMER_INSTALLED_APPS = _CUSTOMER_INSTALLED_APPS
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "helpers.middleware.schemas.SchemaTenantMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
