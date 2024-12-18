@@ -57,7 +57,8 @@ ALLOWED_HOSTS = [
 if DEBUG:
     ALLOWED_HOSTS += [
         "127.0.0.1",
-        "localhost"
+        ".localhost",
+        '.desalsa.io'
     ]
 
 
