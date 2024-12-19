@@ -3,6 +3,8 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
+from . import utils
+
 User = settings.AUTH_USER_MODEL # auth.User
 
 # Create your models here.
@@ -26,4 +28,6 @@ class Tenant(models.Model):
         elif not self.active and not self.inactive_at:
             self.active_at = None
             self.inactive_at = now
+        if not self.schema_name:
+            self.schema_name = utils.generate_unique_schema_name(self.id)
         super().save(*args, **kwargs)
