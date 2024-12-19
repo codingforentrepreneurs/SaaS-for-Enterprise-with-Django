@@ -3,6 +3,11 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
+from helpers.db.validators import (
+    validate_subdomain,
+    validate_blocked_subdomains
+
+)
 from . import utils
 
 User = settings.AUTH_USER_MODEL # auth.User
@@ -12,7 +17,15 @@ class Tenant(models.Model):
     # 
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, db_index=True, editable=False)
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    subdomain = models.CharField(max_length=60, unique=True, db_index=True)
+    subdomain = models.CharField(
+        max_length=60, 
+        unique=True, 
+        db_index=True,
+        validators=[
+            validate_subdomain,
+            validate_blocked_subdomains
+        ]
+    )
     schema_name = models.CharField(max_length=60, unique=True, blank=True, null=True, db_index=True)
     active = models.BooleanField(default=True)
     active_at = models.DateTimeField(null=True, blank=True)
