@@ -126,6 +126,21 @@ if DATABASE_URL is not None:
     }
 
 
+## REDIS CACHING
+
+REDIS_CACHE_URL = config("REDIS_CACHE_URL", default=None)
+
+if REDIS_CACHE_URL is not None:
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_CACHE_URL,
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            }
+        }
+    }
+
 # Add these at the top of your settings.py
 # from os import getenv
 # from dotenv import load_dotenv

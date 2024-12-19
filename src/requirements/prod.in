@@ -10,3 +10,5 @@ django-allauth-ui
 django-widget-tweaks
 stripe
 slippers
+redis
+django-redis

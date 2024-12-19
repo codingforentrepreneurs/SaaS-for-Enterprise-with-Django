@@ -23,10 +23,13 @@ django==5.1.4
     #   -r src/requirements/prod.in
     #   dj-database-url
     #   django-allauth
+    #   django-redis
     #   slippers
 django-allauth[socialaccount]==65.3.0
     # via -r src/requirements/prod.in
 django-allauth-ui==1.5.3
+    # via -r src/requirements/prod.in
+django-redis==5.4.0
     # via -r src/requirements/prod.in
 django-widget-tweaks==1.5.0
     # via
@@ -52,6 +55,10 @@ python-decouple==3.8
     # via -r src/requirements/prod.in
 pyyaml==6.0.2
     # via slippers
+redis==5.2.1
+    # via
+    #   -r src/requirements/prod.in
+    #   django-redis
 requests==2.32.3
     # via
     #   -r src/requirements/prod.in
