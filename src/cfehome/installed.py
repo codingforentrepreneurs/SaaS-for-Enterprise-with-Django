@@ -23,6 +23,7 @@ _CUSTOMER_INSTALLED_APPS = DEFAULT_APPS + [
     "profiles",
     "visits",
 ]
+# reverse("tenants:list")
 
 # public schema default installed apps
 _INSTALLED_APPS = _CUSTOMER_INSTALLED_APPS + [

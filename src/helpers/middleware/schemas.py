@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.db import connection
 
 from helpers.db import statements as db_statements
@@ -36,6 +37,6 @@ class SchemaTenantMiddleware:
     def get_schema_name(self, subdomain=None):
         if subdomain in [None, "localhost", 'desalsa']:
             return "public"
-        if subdomain == "cfe":
-            return "example"
-        return "public"
+        Tenant = apps.get_model('tenants', 'Tenant')
+        obj = Tenant.objects.get(subdomain=subdomain)
+        return obj.schema_name
