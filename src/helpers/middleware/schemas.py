@@ -1,6 +1,9 @@
 from django.apps import apps
 from django.db import connection
 
+from helpers.db.schemas import (
+    use_public_schema
+)
 from helpers.db import statements as db_statements
 
 class SchemaTenantMiddleware:
@@ -37,6 +40,14 @@ class SchemaTenantMiddleware:
     def get_schema_name(self, subdomain=None):
         if subdomain in [None, "localhost", 'desalsa']:
             return "public"
-        Tenant = apps.get_model('tenants', 'Tenant')
-        obj = Tenant.objects.get(subdomain=subdomain)
-        return obj.schema_name
+        schema_name = "public"
+        with use_public_schema():
+            Tenant = apps.get_model('tenants', 'Tenant')
+            try:
+                obj = Tenant.objects.get(subdomain=subdomain)
+                schema_name =  obj.schema_name
+            except Tenant.DoesNotExist:
+                print(f"{subdomain} does not exist as Tenant")
+            except Exception as e:
+                print(f"{subdomain} does not exist as Tenant.\n {e}")
+        return schema_name
