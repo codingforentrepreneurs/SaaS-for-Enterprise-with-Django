@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}Tenants - {{ block.super }}{% endblock head_title %}
+
+
+{% block content %}
+<h1 class="text-lg font-medium">Tenants</h1>
+
+
+  
+<div>
+        {% for instance in object_list %}
+
+        <li><a href="/tenants/{{instance.pk}}">{{ instance.subdomain }}</a></li>
+
+        {% endfor %}
+</div>
+{% endblock content %}
+
