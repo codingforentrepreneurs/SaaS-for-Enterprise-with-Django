@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}Tenant - {{ block.super }}{% endblock head_title %}
+
+
+{% block content %}
+<h1 class="text-lg font-medium">{{ instance.subdomain }}</h1>
+
+
+<form method="POST" action="."> {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit">Create user</button>
+</form>
+
+{% endblock content %}
+
