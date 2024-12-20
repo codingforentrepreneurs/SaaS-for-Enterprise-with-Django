@@ -9,7 +9,7 @@ from helpers.db.validators import (
     validate_blocked_subdomains
 
 )
-from . import utils
+from . import tasks, utils
 
 User = settings.AUTH_USER_MODEL # auth.User
 
@@ -45,4 +45,5 @@ class Tenant(models.Model):
         if not self.schema_name:
             self.schema_name = utils.generate_unique_schema_name(self.id)
         super().save(*args, **kwargs)
-        call_command("migrate_schema")
+        # call_command("migrate_schema")
+        tasks.migrate_tenant_task(self.id)

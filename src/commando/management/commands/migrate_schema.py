@@ -12,74 +12,11 @@ from helpers.db.schemas import (
     use_tenant_schema
 )
 
+from tenants import tasks
+
 class Command(BaseCommand):
 
     def handle(self, *args: Any, **options: Any):
-        Tenant = apps.get_model("tenants", "Tenant")
-        qs = Tenant.objects.none()
-        with use_public_schema():
-            qs = Tenant.objects.filter(active=True)
-            call_command("migrate", interactive=False)
-
-        for tenant_obj in qs:
-            schema_name = tenant_obj.schema_name
-            # Check if the schema already exists
-            with use_tenant_schema(schema_name, create_if_missing=True, revert_public=True):
-                # Initialize the executor after setting the search path
-                executor = MigrationExecutor(connection)
-                loader = executor.loader
-                loader.build_graph()  # Ensure the graph is up-to-date
-
-                customer_apps = getattr(settings, 'CUSTOMER_INSTALLED_APPS', [])
-                customer_app_configs = [
-                    app_config for app_config in apps.get_app_configs()
-                    if app_config.name in customer_apps
-                ]
-
-                # For each customer app, determine what migrations need to be run
-                for app_config in customer_app_configs:
-                    app_label = app_config.label
-
-                    # Get all leaf nodes for this app
-                    leaf_nodes = [
-                        node for node in loader.graph.leaf_nodes()
-                        if node[0] == app_label
-                    ]
-
-                    if not leaf_nodes:
-                        # App has no migrations at all, do nothing silently
-                        continue
-
-                    # For each leaf node, figure out the plan to get there
-                    # If the plan is empty, it means no new migrations are needed.
-                    full_plan = []
-                    for leaf in leaf_nodes:
-                        plan = executor.migration_plan([leaf])
-                        for migration, backwards in plan:
-                            if not backwards:  # only include forward migrations
-                                full_plan.append(migration)
-
-                    # Remove duplicates while preserving order
-                    seen = set()
-                    ordered_migrations = []
-                    for m in full_plan:
-                        if m not in seen:
-                            seen.add(m)
-                            ordered_migrations.append(m)
-
-                    if not ordered_migrations:
-                        # No forward migrations needed for this app
-                        continue
-
-                    # Print out which migrations are going to be applied
-                    self.stdout.write(f"Applying migrations for '{app_label}':")
-                    for migration in ordered_migrations:
-                        self.stdout.write(f"  - {migration.app_label}.{migration.name}")
-
-                    # Apply the migrations
-                    # The plan to migrate is the leaf_nodes for this app
-                    executor.migrate(leaf_nodes)
-                    # Rebuild the graph after applying migrations
-                    executor.loader.build_graph()
-
-            self.stdout.write(self.style.SUCCESS("All migrations for CUSTOMER_APPS are completed."))
+        self.stdout.write("Starting migrations")
+        tasks.migrate_tenant_schemas_task()
+        self.stdout.write(self.style.SUCCESS("All migrations for CUSTOMER_APPS are completed."))
