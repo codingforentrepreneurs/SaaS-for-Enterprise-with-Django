@@ -26,9 +26,6 @@ def activate_tenent_schema(schema_name):
     schema_to_use = DEFAULT_SCHEMA
     if is_check_exists_required and check_if_schema_exists(schema_name):
         schema_to_use = schema_name
-    if schema_to_use == connection.schema_name:
-        print("Schema activated, return")
-        return
     with connection.cursor() as cursor:
         sql = f'SET search_path TO "{schema_to_use}";'
         cursor.execute(sql)
