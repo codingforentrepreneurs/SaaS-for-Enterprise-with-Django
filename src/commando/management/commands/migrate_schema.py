@@ -21,7 +21,7 @@ class Command(BaseCommand):
             )
         qs = Tenant.objects.filter(active=True)
         # schemas = list(qs.values_list('schema_name', flat=True))
-        skip_public = True
+        skip_public = False
 
         if not skip_public:
             call_command("migrate", interactive=False)
