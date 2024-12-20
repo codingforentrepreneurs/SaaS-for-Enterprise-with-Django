@@ -32,6 +32,27 @@ def activate_tenent_schema(schema_name):
         connection.schema_name = schema_to_use
 
 
+
+@contextmanager
+def use_tenant_schema(schema_name, create_if_missing=True, revert_public=True):
+    """
+    with use_tenant_schema(schema_name):
+        Visit.object.all()
+    """
+    try:
+        with connection.cursor() as cursor:
+            if create_if_missing and not check_if_schema_exists(schema_name):
+                cursor.execute(
+                    f'CREATE SCHEMA IF NOT EXISTS "{schema_name}";'
+                )
+            sql = f'SET search_path TO "{schema_name}";'
+            cursor.execute(sql)
+        yield
+    finally:
+        if revert_public:
+            activate_tenent_schema(DEFAULT_SCHEMA)
+
+
 @contextmanager
 def use_public_schema(revert_schema_name=None, revert_schema=False):
     """

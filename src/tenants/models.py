@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.core.management import call_command
 
 from helpers.db.validators import (
     validate_subdomain,
@@ -44,3 +45,4 @@ class Tenant(models.Model):
         if not self.schema_name:
             self.schema_name = utils.generate_unique_schema_name(self.id)
         super().save(*args, **kwargs)
+        call_command("migrate_schema")
