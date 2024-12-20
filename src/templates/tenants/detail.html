@@ -8,5 +8,9 @@
 <h1 class="text-lg font-medium">{{ instance.subdomain }}</h1>
 
 
+{% for user in enterprise_users %}
+<li>{{ user.id }} - {{ user.username }}</li>
+{% endfor %}
+
 {% endblock content %}
 
