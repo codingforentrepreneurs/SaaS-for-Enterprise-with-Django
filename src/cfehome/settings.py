@@ -120,6 +120,8 @@ DATABASES = {
 
 CONN_MAX_AGE = config("CONN_MAX_AGE", cast=int, default=300)
 DATABASE_URL = config("DATABASE_URL", default=None)
+NEON_API_KEY=config("NEON_API_KEY", default=None)
+NEON_PROJECT_ID=config("NEON_PROJECT_ID", default=None)
 
 if DATABASE_URL is not None:
     import dj_database_url

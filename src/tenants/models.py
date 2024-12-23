@@ -35,6 +35,9 @@ class Tenant(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
+        created = False
+        if not self.pk:
+            created = True
         now = timezone.now()
         if self.active and not self.active_at:
             self.active_at = now
@@ -46,4 +49,4 @@ class Tenant(models.Model):
             self.schema_name = utils.generate_unique_schema_name(self.id)
         super().save(*args, **kwargs)
         # call_command("migrate_schema")
-        tasks.migrate_tenant_task(self.id)
+        tasks.migrate_tenant_task(self.id, branch=created)

@@ -19,7 +19,9 @@ def migrate_public_schema_task():
 
 
 # @shared_task
-def migrate_tenant_task(tenant_id:str):
+def migrate_tenant_task(tenant_id:str, branch=True):
+    if branch:
+        call_command("db_branch")
     Tenant = apps.get_model("tenants", "Tenant")
     try:
         instance = Tenant.objects.get(id=tenant_id)
@@ -93,6 +95,6 @@ def migrate_tenant_schemas_task():
     with use_public_schema():
         qs = Tenant.objects.all().values_list('id', flat=True)
         call_command("migrate", interactive=False)
-    
+    call_command("db_branch")
     for tenant_id in qs:
-        migrate_tenant_task(tenant_id)
+        migrate_tenant_task(tenant_id, branch=False)
