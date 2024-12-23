@@ -4,7 +4,7 @@ from visits.models import PageVisit
 
 @login_required
 def dashboard_view(request):
-    qs = PageVisit.objects.filter(user=request.user)
+    qs = PageVisit.objects.all() #.filter(user=request.user)
     visit_count = qs.count()
     return render(request, "dashboard/main.html", {
         "visit_count": visit_count,

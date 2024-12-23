@@ -131,7 +131,7 @@ if DATABASE_URL is not None:
             conn_max_age=CONN_MAX_AGE,
             conn_health_checks=True,
             engine='helpers.db.engine'
-        )
+        ),
     }
 
 
