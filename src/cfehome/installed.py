@@ -12,6 +12,7 @@ DEFAULT_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    'django_hosts',
     'slippers',
     "widget_tweaks",
 ]

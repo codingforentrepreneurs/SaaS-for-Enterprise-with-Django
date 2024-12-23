@@ -68,6 +68,7 @@ INSTALLED_APPS = _INSTALLED_APPS
 CUSTOMER_INSTALLED_APPS = _CUSTOMER_INSTALLED_APPS
 
 MIDDLEWARE = [
+    "django_hosts.middleware.HostsRequestMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "helpers.middleware.schemas.SchemaTenantMiddleware",
@@ -78,9 +79,15 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_hosts.middleware.HostsResponseMiddleware",
 ]
 
+DEFAULT_HOST = "www"
+PARENT_HOST = "localhost:8000"
+ROOT_HOSTCONF = "cfehome.hosts"
 ROOT_URLCONF = "cfehome.urls"
+ENTERPRISES_URLCONF = "enterprises.urls"
+# ROOT_URLCONF = ENTERPRISES_URLCONF
 
 TEMPLATES = [
     {

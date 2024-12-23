@@ -12,3 +12,4 @@ stripe
 slippers
 redis
 django-redis
+django-hosts

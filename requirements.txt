@@ -29,6 +29,8 @@ django-allauth[socialaccount]==65.3.0
     # via -r src/requirements/prod.in
 django-allauth-ui==1.5.3
     # via -r src/requirements/prod.in
+django-hosts==6.0
+    # via -r src/requirements/prod.in
 django-redis==5.4.0
     # via -r src/requirements/prod.in
 django-widget-tweaks==1.5.0
