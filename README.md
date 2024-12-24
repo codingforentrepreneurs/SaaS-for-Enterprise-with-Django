@@ -9,7 +9,7 @@ Use [the discussions tab](https://saasgorillas.com/discussions).
 I recommend you know some of the following:
 - __Python__
   - Such as _classes_, _functions_, _variables_, _math operations_, _installing_, _setting up virtual environments_
-  - If you're new to Python, watch up to day 15 of [30 Days of Python](saasgorillas.com/python1)(free)
+  - If you're new to Python, watch up to day 15 of [30 Days of Python](https://saasgorillas.com/python1)(free)
 - __Django basics__
   - Such as _views_, _URL routing_, _models_ and _migrations_, _users_ and auth _login_
   - If new to Django, watch [Your First Django Project](https://saasgorillas.com/django1)(paid) or [Try Django 3.2](https://saasgorillas.com/django2)(free)
